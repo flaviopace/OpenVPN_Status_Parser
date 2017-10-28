@@ -6,7 +6,7 @@ with open('/etc/openvpn/openvpn-status.log') as logfile:
 table  = ("<html><table border='1'<tr> <th>IP</th> <th>Cert Name</th> <th>Rcv Bytes</th> \
 <th>Sent Bytes</th> <th>Connected Sinze</th> </tr>")
 
-print(status.updated_at)  # datetime.datetime(2015, 6, 18, 8, 12, 15)
+print(" - Date {}".format(status.updated_at))  # datetime.datetime(2015, 6, 18, 8, 12, 15)
 
 def printDetails(ipaddr, client):
     print "------"
