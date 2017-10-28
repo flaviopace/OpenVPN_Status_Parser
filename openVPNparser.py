@@ -3,8 +3,11 @@ from openvpn_status import parse_status
 with open('/etc/openvpn/openvpn-status.log') as logfile:
     status = parse_status(logfile.read())
 
-table  = ("<html><table border='1'<tr> <th>IP</th> <th>Cert Name</th> <th>Rcv Bytes</th> \
-<th>Sent Bytes</th> <th>Connected Sinze</th> </tr>")
+indexArr = 0
+arraycolor = ['0xeeeeee','0xdddddd']
+
+table  = ("<html><table style='font-weight: bold' bgcolor='B0DC7A' border='1'> <tr> <th>IP</th> <th>Cert Name</th> <th>Rcv Bytes</th> \
+<th>Sent Bytes</th> <th>Connected Since</th> </tr>")
 
 print(" - Date {}".format(status.updated_at))  # datetime.datetime(2015, 6, 18, 8, 12, 15)
 
@@ -18,8 +21,8 @@ def printDetails(ipaddr, client):
     print "------"
 
 
-def addHTMLRowTable(ipaddr, client):
-    table = "<tr>"
+def addHTMLRowTable(ipaddr, client, inc):
+    table = "<tr bgcolor='{}'>". format(arraycolor[inc])
     table += "<th>{}</th>". format(ip)
     table += "<th>{}</th>". format(client.common_name)
     table += "<th>{}</th>". format(client.bytes_received)
@@ -30,7 +33,10 @@ def addHTMLRowTable(ipaddr, client):
 
 for ip, client in status.client_list.iteritems():
     #printDetails(ip, client)
-    table += addHTMLRowTable(ip, client)
+    if (indexArr == 2):
+        indexArr = 0
+    table += addHTMLRowTable(ip, client, indexArr)
+    indexArr += 1
 
 table += ("</table></html>")
 
