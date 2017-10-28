@@ -6,19 +6,15 @@ with open('/etc/openvpn/openvpn-status.log') as logfile:
 print(status.updated_at)  # datetime.datetime(2015, 6, 18, 8, 12, 15)
 
 def printDetails(ipaddr, client):
-
-	print "Client IP: {} " . format(ip)
-	print "Cert Name: {}" .format(client.common_name)
-	print "Client Rcv Bytes: {}" .format(client.bytes_received)
-	print "Client Snd Bytes: {}" .format(client.bytes_sent)
-	print "Client Connected: {}" .format(client.connected_since)
-
+    print "------"
+    print "Client IP: {:>21} " . format(ip)
+    print "Cert Name: {:>10}" .format(client.common_name)
+    print "Client Rcv Bytes: {}" .format(client.bytes_received)
+    print "Client Snd Bytes: {}" .format(client.bytes_sent)
+    print "Client Connected: {}" .format(client.connected_since)
+    print "------"
 
 
 
 for ip, client in status.client_list.iteritems():
-	printDetails(ip, client)	
-
-
-
-
+    printDetails(ip, client)
